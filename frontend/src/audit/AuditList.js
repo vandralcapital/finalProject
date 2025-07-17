@@ -61,7 +61,7 @@ const AuditList = () => {
         app: audit.application_id._id
       };
 
-      const response = await axios.post('/updateAuditRights', updateData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/updateAuditRights`, updateData);
 
       if (response.data.success) {
         setAudits(prevAudits => 
@@ -155,7 +155,7 @@ const AuditList = () => {
       console.log('Submitting review:', payload);
 
       // Call /submitReview to save the completed review
-      await axios.post('/submitReview', payload);
+      await axios.post(`${process.env.REACT_APP_API_URL}/submitReview`, payload);
 
       Swal.fire({
         title: "Review marked as completed!",
@@ -190,7 +190,7 @@ const AuditList = () => {
       return;
     }
     try {
-      await axios.post('/sendReviewNotification', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/sendReviewNotification`, {
         reviewerEmail,
         employeeNames: [employeeName],
         message: `Review is pending for employee: ${employeeName}`
@@ -219,7 +219,7 @@ const AuditList = () => {
         const normalizedUserEmail = user?.email?.trim().toLowerCase();
         console.log('Fetching audits for user:', normalizedUserEmail); // Add logging
 
-        const response = await axios.get('/pastAudits', {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/pastAudits`, {
           params: {
             user: user?.role === 'admin' ? 'admin' : user?._id,
             application: selectedApplication
@@ -265,7 +265,7 @@ const AuditList = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await axios.get('/creating'); // Fetch all applications
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/creating`); // Fetch all applications
         setApplications(response.data); // Store applications for the filter dropdown
 
       } catch (err) {

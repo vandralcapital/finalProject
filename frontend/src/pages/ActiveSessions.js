@@ -14,7 +14,7 @@ const ActiveSessions = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/active-sessions');
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/active-sessions`);
       if (!res.ok) throw new Error('Failed to fetch active sessions');
       const data = await res.json();
       setSessions(data.sessions || []);
@@ -32,7 +32,7 @@ const ActiveSessions = () => {
   const handleTerminate = async (email) => {
     setTerminating(email);
     try {
-      const res = await fetch('/api/terminate-session', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/terminate-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

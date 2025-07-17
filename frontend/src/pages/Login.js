@@ -15,7 +15,7 @@ function Login() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        axios.post('/login', { email, password }).then(result => {
+        axios.post(`${process.env.REACT_APP_API_URL}/login`, { email, password }).then(result => {
 
             if (result.data.success) {
                 localStorage.setItem('token', result.data.token); // Store JWT token

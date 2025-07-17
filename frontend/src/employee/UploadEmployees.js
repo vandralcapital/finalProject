@@ -44,7 +44,7 @@ const UploadEmployees = () => {
         formData.append("file", file);
 
         try {
-            const response = await axios.post('/uploadEmployees', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/uploadEmployees`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setMessage(response.data.message);

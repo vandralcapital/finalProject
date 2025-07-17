@@ -15,14 +15,14 @@ const MyEmployees = () => {
       setLoading(true);
       try {
         // Get all applications for this admin
-        const appRes = await fetch('/creating');
+        const appRes = await fetch(`${process.env.REACT_APP_API_URL}/creating`);
         const apps = await appRes.json();
         const myApps = apps.filter(app => app.adminEmail === user.email);
         const appNames = myApps.map(app => app.appName);
         setMyAppNames(appNames);
 
         // Get all employees
-        const empRes = await fetch('/employee');
+        const empRes = await fetch(`${process.env.REACT_APP_API_URL}/employee`);
         const allEmployees = await empRes.json();
         // Filter employees by applicationName (for manual creation)
         const filtered = allEmployees.filter(emp => appNames.includes(emp.applicationName));

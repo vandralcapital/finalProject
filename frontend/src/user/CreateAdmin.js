@@ -25,7 +25,7 @@ const CreateAdmin = () => {
         password,
       };
 
-      const response = await axios.post('/create-admin', newAdmin);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-admin`, newAdmin);
 
       Swal.fire({
         title: 'Admin User Created Successfully',

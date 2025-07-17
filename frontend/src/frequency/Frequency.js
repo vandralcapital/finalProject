@@ -19,7 +19,7 @@ const FrequencyIndex = () => {
   // Fetch frequencies from the backend
   const fetchFrequencies = async () => {
     try {
-      const response = await axios.get('/frequency');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/frequency`);
       setFrequencies(response.data);
       setError('');
     } catch (err) {
@@ -63,7 +63,7 @@ const FrequencyIndex = () => {
       if (result.isConfirmed) {
         try {
           // Call backend delete endpoint (will implement this next)
-          await axios.delete(`/frequency/${id}`);
+          await axios.delete(`${process.env.REACT_APP_API_URL}/frequency/${id}`);
           Swal.fire(
             'Deleted!',
             'The frequency has been deleted.',
@@ -91,7 +91,7 @@ const FrequencyIndex = () => {
       // Call backend update endpoint (will implement this next)
       const token = localStorage.getItem('token');
       await axios.put(
-        `/frequency/${currentFrequency._id}`,
+        `${process.env.REACT_APP_API_URL}/frequency/${currentFrequency._id}`,
         editFormData,
         {
           headers: {

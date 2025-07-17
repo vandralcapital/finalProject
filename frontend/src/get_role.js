@@ -8,7 +8,7 @@ const ProtectedRoute = ({ element: Element, allowedRoles, ...rest }) => {
 
   useEffect(() => {
     // Fetch the user role from your backend (could be from a session or an API)
-    fetch('/get-user-role')
+    fetch(`${process.env.REACT_APP_API_URL}/get-user-role`)
       .then((res) => res.json())
       .then((data) => {
         setRole(data.role); // Set the user role

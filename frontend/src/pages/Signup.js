@@ -12,7 +12,7 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('/register', { name, email, password })
+        axios.post(`${process.env.REACT_APP_API_URL}/register`, { name, email, password })
             .then(result => {
                 console.log(result);
                 navigate('/login'); 

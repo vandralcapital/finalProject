@@ -39,7 +39,7 @@ const UploadHod = () => {
         formData.append("file", file);
 
         try {
-            const response = await axios.post('/uploadHods', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/uploadHods`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setMessage(response.data.message);

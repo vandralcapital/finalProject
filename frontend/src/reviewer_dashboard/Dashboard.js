@@ -57,7 +57,7 @@ const Dashboard = () => {
     const fetchCompletedReviews = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('/completedReviews', {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/completedReviews`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
         setCompletedReviews(response.data);

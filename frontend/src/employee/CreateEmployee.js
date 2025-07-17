@@ -14,7 +14,7 @@ const EmployeeForm = () => {
   const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    fetch('/hods')
+    fetch(`${process.env.REACT_APP_API_URL}/hods`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch register');

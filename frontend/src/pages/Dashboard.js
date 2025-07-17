@@ -13,7 +13,7 @@ const Dashboard = () => {
     const fetchUserCount = async () => {
       try {
         // Replace with your actual API URL
-        const response = await fetch('/total-users');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/total-users`);
         const data = await response.json();
         setTotalUsers(data.count); // Assuming the API returns a count field
       } catch (error) {
@@ -28,7 +28,7 @@ const Dashboard = () => {
     const fetchEmpCount = async () => {
       try {
         // Replace with your actual API URL
-        const response = await fetch('/count-hods');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/count-hods`);
         const data = await response.json();
         setTotalEmp(data.count); // Assuming the API returns a count field
       } catch (error) {
@@ -44,7 +44,7 @@ const Dashboard = () => {
     const fetchFreqCount = async () => {
       try {
         // Replace with your actual API URL
-        const response = await fetch('/count-freq');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/count-freq`);
         const data = await response.json();
         setTotalfreq(data.count); // Assuming the API returns a count field
       } catch (error) {
@@ -59,7 +59,7 @@ const Dashboard = () => {
     const fetchReviewCount = async () => {
       try {
         // Replace with your actual API URL
-        const response = await fetch('/count-review');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/count-review`);
         const data = await response.json();
         setTotalreview(data.count); // Assuming the API returns a count field
       } catch (error) {

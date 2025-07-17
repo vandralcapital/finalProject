@@ -32,7 +32,7 @@ const CreateAuditForm = () => {
 
   useEffect(() => {
     // fetch employees
-    fetch('/employee')
+    fetch(`${process.env.REACT_APP_API_URL}/employee`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch frequencies');
@@ -47,7 +47,7 @@ const CreateAuditForm = () => {
       });
 
     // Fetch frequencies
-    fetch('/frequency')
+    fetch(`${process.env.REACT_APP_API_URL}/frequency`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch frequencies');
@@ -62,7 +62,7 @@ const CreateAuditForm = () => {
       });
 
     // Fetch users
-    fetch('/register')
+    fetch(`${process.env.REACT_APP_API_URL}/register`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch users');
@@ -77,7 +77,7 @@ const CreateAuditForm = () => {
       });
 
     // Fetch applications
-    fetch('/creating')
+    fetch(`${process.env.REACT_APP_API_URL}/creating`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch applications');
@@ -111,7 +111,7 @@ const CreateAuditForm = () => {
     };
 
     try {
-      const response = await axios.post('/audit', newAudit);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/audit`, newAudit);
       Swal.fire({
         title: "Review Created Successfully",
         icon: "success",
@@ -135,7 +135,7 @@ const CreateAuditForm = () => {
     setSelectedRights([]); // Clear previously selected rights
     setAppRights({}); // Clear appRights state before fetching
     try {
-      const response = await axios.get('/getApplicationDataForReview', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/getApplicationDataForReview`, {
         params: { application_id: applicationId }  // Send frequency_id in the query parameters
       });
       

@@ -22,7 +22,7 @@ function UploadExcel() {
     useEffect(() => {
         const fetchApplications = async () => {
             try {
-                const response = await axios.get('/creating');
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/creating`);
                 setApplications(response.data);
             } catch (error) {
                 console.error('Error fetching applications:', error);
@@ -77,7 +77,7 @@ function UploadExcel() {
         // Fetch application data when an application is selected
         if (applicationId) {
             try {
-                const response = await axios.get('/getApplicationDataForReview', {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/getApplicationDataForReview`, {
                     params: { application_id: applicationId }
                 });
                 // Assuming the response data structure is response.data.message contains application details
@@ -171,7 +171,7 @@ function UploadExcel() {
 
             // Process the data
             const response = await axios.post(
-                '/excelUpload',
+                `${process.env.REACT_APP_API_URL}/excelUpload`,
                 previewData,
                 {
                     headers: {

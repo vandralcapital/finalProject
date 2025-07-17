@@ -26,7 +26,7 @@ const FrequencyForm = () => {
 
       console.log('Sending frequency data:', newFrequency); // Debug log
 
-      const response = await axios.post('/frequency', newFrequency);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/frequency`, newFrequency);
       console.log('Response:', response.data); // Debug log
       
       window.location.href = "/frequency";

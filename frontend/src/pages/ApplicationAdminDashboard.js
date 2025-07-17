@@ -43,13 +43,13 @@ const ApplicationAdminDashboard = () => {
       setLoading(true);
       try {
         // 1. Get all applications for this admin
-        const appsRes = await axios.get('/creating');
+        const appsRes = await axios.get(`${process.env.REACT_APP_API_URL}/creating`);
         const myApps = appsRes.data.filter(app => app.adminEmail === user.email);
         const myAppIds = myApps.map(app => app._id);
         setAppIds(myAppIds);
 
         // 2. Get all pending audits for admin (new endpoint)
-        const auditsRes = await axios.get('/pendingAuditsForAdmin', {
+        const auditsRes = await axios.get(`${process.env.REACT_APP_API_URL}/pendingAuditsForAdmin`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setPendingReviews(auditsRes.data);
@@ -107,7 +107,7 @@ const ApplicationAdminDashboard = () => {
         reviewersToNotify.map(async (email) => {
           const audits = reviewerMap[email].audits;
           const employeeNames = audits.map(a => a.emp_id?.name).filter(Boolean);
-          await axios.post('/sendReviewNotification', {
+          await axios.post(`${process.env.REACT_APP_API_URL}/sendReviewNotification`, {
             reviewerEmail: email,
             employeeNames,
             message: `The following employee(s) are awaiting your review: ${employeeNames.join(', ')}.`

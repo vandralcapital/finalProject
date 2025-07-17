@@ -23,14 +23,14 @@ function App() {
   // Fetch applications
   useEffect(() => {
     axios
-      .get('/creating')
+      .get(`${process.env.REACT_APP_API_URL}/creating`)
       .then((result) => setApps(result.data))
       .catch((err) => setError("Failed to fetch apps"));
   }, []);
 
   // Fetch frequencies
   useEffect(() => {
-    axios.get('/frequency')
+    axios.get(`${process.env.REACT_APP_API_URL}/frequency`)
       .then(response => setFrequencies(response.data))
       .catch(err => {
         console.error('Error fetching frequencies:', err);
@@ -42,7 +42,7 @@ function App() {
     if (!window.confirm("Are you sure you want to delete this apps?")) return;
 
     try {
-      await axios.delete(`/apps/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/apps/${id}`);
       setApps(apps.filter((app) => app._id !== id));
     } catch (err) {
       setError("Failed to delete app");
@@ -143,7 +143,7 @@ function App() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`/apps/${editingApp._id}`, editForm, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/apps/${editingApp._id}`, editForm, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -161,7 +161,7 @@ function App() {
   // Function to re-fetch applications - important for showing updated populated data
   const fetchApps = async () => {
     try {
-      const response = await axios.get('/creating');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/creating`);
       setApps(response.data);
       setError(null); // Clear error on successful fetch
     } catch (err) {
@@ -176,7 +176,7 @@ function App() {
     try {
       const token = localStorage.getItem('token');
       // Send PUT request to update the application status
-      await axios.put(`/apps/${app._id}/status`, { status: newStatus }, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/apps/${app._id}/status`, { status: newStatus }, {
         headers: {
           Authorization: `Bearer ${token}`
         }

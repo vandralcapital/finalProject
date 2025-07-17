@@ -18,7 +18,7 @@ const EmployeeIndex = () => {
   // Fetch employees data from the backend
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('/employee');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/employee`);
       setEmployees(response.data);
     } catch (err) {
       setError('Error fetching employee data.');
@@ -28,7 +28,7 @@ const EmployeeIndex = () => {
   // Fetch reviewers (HODs)
   const fetchReviewers = async () => {
     try {
-      const response = await axios.get('/hods');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/hods`);
       setReviewers(response.data);
     } catch (err) {
       setError('Error fetching reviewers.');
@@ -39,7 +39,7 @@ const EmployeeIndex = () => {
   const updateStatus = async (id, status) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`/employee/${id}`, { status }, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/employee/${id}`, { status }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -92,7 +92,7 @@ const EmployeeIndex = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`/employee/${editingEmployee._id}`, editForm, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/employee/${editingEmployee._id}`, editForm, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -110,7 +110,7 @@ const EmployeeIndex = () => {
   const handleConvertToReviewer = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/convertToReviewer', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/convertToReviewer`, {
         name: editForm.name,
         email: editForm.email
       }, {

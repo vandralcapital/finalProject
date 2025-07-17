@@ -23,7 +23,7 @@ const PendingAuditList = () => {
         if (user.role === "admin") { // Used === 
           param = { user: "admin" };
         }
-        const response = await axios.get('/pendingAudits', {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/pendingAudits`, {
           params: param
         });
         console.log("Pending audits fetched successfully:", response.data); // Log successful fetch and data
@@ -93,7 +93,7 @@ const PendingAuditList = () => {
         app: application,
         action: selectedAction
       }
-      await axios.post('/submitReview', obj);
+      await axios.post(`${process.env.REACT_APP_API_URL}/submitReview`, obj);
       // Optimistically remove the audit from the list
       setAudits(prev => prev.filter(a => a._id !== auditId));
       setSubmitting(prev => ({ ...prev, [auditId]: false }));
@@ -154,7 +154,7 @@ const PendingAuditList = () => {
       return;
     }
     try {
-      await axios.post('/sendReviewNotification', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/sendReviewNotification`, {
         reviewerEmail,
         employeeNames: [employeeName],
         message: `Review is pending for employee: ${employeeName}`

@@ -16,7 +16,7 @@ const HodIndex = () => {
 
   const fetchHods = async () => {
     try {
-      const response = await axios.get('/hods');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/hods`);
       sethod(response.data);
     } catch (err) {
       setError('Error fetching HOD data.');
@@ -58,7 +58,7 @@ const HodIndex = () => {
     setFormError("");
     try {
       console.log('Sending update data:', formData);
-      const response = await axios.put(`/hods/${selectedHod._id}`, formData);
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/hods/${selectedHod._id}`, formData);
       console.log('Backend response:', response.data);
 
       // After successful update, re-fetch the HOD list to get the latest populated data
