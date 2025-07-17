@@ -54,7 +54,7 @@ const EmployeeForm = () => {
       };
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        '/employee',
+        `${process.env.REACT_APP_API_URL}/employee`,
         newEmployee,
         {
           headers: {
