@@ -44,9 +44,15 @@ const simulateAuthMiddleware = (req, res, next) => {
 };
 
 const app = express()
+const allowedOrigins = ['http://10.91.41.16'];
+
 app.use(cors({
   origin: function (origin, callback) {
-    callback(null, origin); // Dynamically allow the requesting origin
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true
 }));
