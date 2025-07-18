@@ -1853,3 +1853,7 @@ app.post('/api/terminate-session', async (req, res) => {
     res.status(500).json({ error: 'Failed to terminate session', details: err.message });
   }
 });
+const path = require('path');
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
