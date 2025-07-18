@@ -44,7 +44,7 @@ const simulateAuthMiddleware = (req, res, next) => {
 };
 
 const app = express()
-const allowedOrigins = ['http://10.91.41.16'];
+const allowedOrigins = ['https://10.91.41.16'];
 
 app.use(cors({
   origin: function (origin, callback) {
